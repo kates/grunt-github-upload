@@ -27,7 +27,7 @@ module.exports = function( grunt ) {
 
 		utils.async.waterfall([
 			function (callback) {
-				log.write("Listing downloads ");
+				log.write("Listing downloads...");
 
 				utils.spawn({
 					cmd : "curl",
@@ -38,7 +38,7 @@ module.exports = function( grunt ) {
 						return;
 					}
 
-					log.ok("DONE");
+					log.ok();
 
 					callback(null, _.filter(JSON.parse(result), function (download) {
 						return download.name === name;
@@ -51,7 +51,7 @@ module.exports = function( grunt ) {
 					callback(null);
 				}
 
-				log.write("Deleting duplicate file ");
+				log.write("Deleting duplicate file...");
 
 				utils.async.forEach(downloads, function (download, _callback) {
 					utils.spawn({
@@ -73,14 +73,14 @@ module.exports = function( grunt ) {
 						return;
 					}
 
-					log.ok("DONE");
+					log.ok();
 
 					callback(null);
 				});
 			},
 
 			function (callback) {
-				log.write("Creating download entry ");
+				log.write("Creating download entry...");
 
 				fs.stat(file, function (err, stats) {
 					if (err) {
@@ -103,7 +103,7 @@ module.exports = function( grunt ) {
 							return;
 						}
 
-						log.ok("DONE");
+						log.ok();
 
 						callback(null, JSON.parse(result));
 					});
@@ -111,7 +111,7 @@ module.exports = function( grunt ) {
 			},
 
 			function (response, callback) {
-				log.write("Uploading file ");
+				log.write("Uploading file...");
 
 				utils.spawn({
 					cmd : "curl",
@@ -133,7 +133,7 @@ module.exports = function( grunt ) {
 						return;
 					}
 
-					log.ok("DONE");
+					log.ok();
 
 					callback(null, result);
 				});
