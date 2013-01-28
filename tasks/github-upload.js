@@ -2,7 +2,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerMultiTask("upload", "Upload files to github", function () {
 		var fs = require("fs");
-		var utils = grunt.utils;
+		var utils = "0.4" > grunt.version ? grunt.utils : grunt.util;
 		var config = grunt.config;
 		var log = grunt.log;
 		var _ = utils._;
